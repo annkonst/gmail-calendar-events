@@ -20,4 +20,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  start_date: Start day
+  end_date:	End Day
+  title: Title
+  members: Guests
+  load: Load Events
+  event_data: Event date
