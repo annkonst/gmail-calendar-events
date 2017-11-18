@@ -1,0 +1,10 @@
+<ul>
+  <% @calendar_list.items.each do |calendar| %>
+    <p>Title</p>
+    <li><%= calendar.summary %></li>
+    <p>Members</p>
+    <% calendar.attendees.each do |member| %>
+      <li><%= member.email %></li>
+   	<% end %> 	
+  <% end %>
+</ul>
