@@ -45,7 +45,7 @@ class HomeController < ApplicationController
   def set_calendar_search
     @calendar_search = {
       time_min: parse_time_parameter(:time_min) || Time.zone.now.beginning_of_day,
-      time_max: parse_time_parameter(:time_max) || Time.zone.now.beginning_of_day + 1.day
+      time_max: parse_time_parameter(:time_max) || Time.zone.tomorrow.beginning_of_day
     }
   end
 end

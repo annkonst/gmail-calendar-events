@@ -1,27 +1,32 @@
 .container  
+  p.h4.title-margin= I18n.t('.about')
   form
     = form_for :calendar_search, method: :get do |f|
       .form-group
         = f.label :time_min, I18n.t('.start_date')
-        = f.text_field :time_min, class: 'datepicker form-control',  
+        = f.text_field :time_min, class: 'datepicker form-control date-width',  
           value: l(@calendar_search[:time_min].to_date) 
       .form-group    
         = f.label :time_max, I18n.t('.end_date')
-        = f.text_field :time_max, class: 'datepicker form-control',  
+        = f.text_field :time_max, class: 'datepicker form-control date-width',  
           value: l(@calendar_search[:time_max].to_date) 
       = f.submit I18n.t('.load'), class: 'btn btn-primary'
-  table.table
-    thead
-      tr
-        th= I18n.t('.title')
-        th= I18n.t('.event_data')
-        th= I18n.t('.members')
-    tbody
-      tr
+  - if @calendar_list.items.present?
+    table.table
+      thead
+        tr
+          th= I18n.t('.title')
+          th= I18n.t('.event_data')
+          th= I18n.t('.members')
+      tbody
         - @calendar_list.items.each do |calendar|
-          td= calendar.summary
-          td= l(calendar.start.to_h[:date_time], format: "%d/%m/%Y at %I:%M%p")
-          td
-            - calendar.attendees.each do |member|
-              = member.email
-              br
+          tr
+            td= calendar.summary
+            td= l(calendar.start.to_h[:date_time], format: "%d/%m/%Y at %I:%M%p")
+            td
+              - if calendar.attendees
+                - calendar.attendees.each do |member|
+                  = member.email
+                  br
+  - else 
+    p.title-margin= I18n.t('.no_events')
